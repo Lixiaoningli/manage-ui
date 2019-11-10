@@ -6,6 +6,9 @@
     class="my-menu"
     @on-select="menuItemSelect"
   >
+    <MenuItem name="/home">
+      <Icon type="ios-construct" />首页
+    </MenuItem>
     <MenuItem name="boorowbooks">
       <Icon type="ios-construct" />借书管理
     </MenuItem>
@@ -32,12 +35,12 @@ import { log } from 'util'
 export default {
   data() {
     return {
-      activeName: 'boorowbooks'
+      activeName: '/home'
     }
   },
   methods: {
     menuItemSelect(name) {
-      this.$router.push('/home/' + name)
+      this.$router.push(name)
     }
   }
 }
