@@ -1,0 +1,24 @@
+#login {
+  background-image: url('/image/books-b.jpg');
+  background-size: 100% 100%;
+}
+/* 当屏幕宽度分辨率小于等于1366时采用此分辨率 */
+@media screen and (max-width: 1600px) {
+  .card {
+    width: 500px;
+    height: 300px;
+    position: fixed;
+    right: 5%;
+    top: 20%;
+  }
+}
+/* 当屏幕宽度分辨率小于等于2560时采用此分辨率 */
+@media screen and (max-width: 2560px) and (min-width: 1599px) {
+  .card {
+    width: 800px;
+    height: 500px;
+    position: fixed;
+    right: 5%;
+    top: 20%;
+  }
+}
