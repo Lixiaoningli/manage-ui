@@ -5,11 +5,11 @@ module.exports = {
     // 配置转发代理
     devServer: {
         proxy: {
-            '/oauth': {
+            '/user': {
                 target: url,
                 ws: true,
                 pathRewrite: {
-                    '^/oauth': '/oauth'
+                    '^/user': '/user'
                 }
             }
         }

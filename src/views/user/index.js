@@ -1,3 +1,4 @@
+import { queryPage } from '@/api/login/index.js'
 export default {
   data() {
     return {
@@ -9,11 +10,7 @@ export default {
         },
         {
           title: '用户名',
-          key: 'userName'
-        },
-        {
-          title: '用户角色',
-          key: 'roleName'
+          key: 'username'
         },
         {
           title: '持有人',
@@ -21,35 +18,26 @@ export default {
         },
         {
           title: '上次登录时间',
-          key: 'lastDateTime'
+          key: 'loginTime'
         }
       ],
-      tableData: [
-        {
-          userName: 'John Brown',
-          roleName: '管理员',
-          holder: 'New York No. 1 Lake Park',
-          lastDateTime: '2016-10-03 18:25:59'
-        },
-        {
-          userName: 'Jim Green',
-          roleName: '管理员',
-          holder: 'London No. 1 Lake Park',
-          lastDateTime: '2016-10-01 09:31:02'
-        },
-        {
-          userName: 'Joe Black',
-          roleName: '管理员',
-          holder: 'Sydney No. 1 Lake Park',
-          lastDateTime: '2016-10-02 12:25:25'
-        },
-        {
-          userName: 'Jon Snow',
-          roleName: '管理员',
-          holder: 'Ottawa No. 2 Lake Park',
-          lastDateTime: '2016-10-04 12:11:35'
-        }
-      ]
+      tableData: [],
+      page: {
+        current: 1,
+        size: 10,
+        total: 0
+      }
+    }
+  },
+  mounted() {
+    this.getPage(this.page)
+  },
+  methods: {
+    // 查询用户列表
+    getPage(page, params) {
+      queryPage(Object.assign(page, params)).then(res => {
+        this.tableData = res.data.data.records
+      })
     }
   }
 }

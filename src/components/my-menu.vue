@@ -32,14 +32,18 @@
 </template>
 <script>
 import { log } from 'util'
+import { mapGetters } from 'vuex'
 export default {
+  mounted() {},
   data() {
-    return {
-      activeName: '/home'
-    }
+    return {}
+  },
+  computed: {
+    ...mapGetters({ activeName: 'activeName' })
   },
   methods: {
     menuItemSelect(name) {
+      sessionStorage.setItem('activeName', name)
       this.$router.push(name)
     }
   }

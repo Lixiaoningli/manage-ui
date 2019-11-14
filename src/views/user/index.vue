@@ -2,7 +2,7 @@
   <div id="user">
     <Card>
       <Table stripe :columns="tableCol" :data="tableData"></Table>
-      <Page class-name="page" :total="100" show-sizer />
+      <Page class-name="page" :total="page.total" show-sizer />
     </Card>
   </div>
 </template>

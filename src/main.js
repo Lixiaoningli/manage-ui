@@ -5,13 +5,14 @@ import router from '@/router/index.js'
 // 引入Iview 组件 （v: 4.x）
 import ViewUI from 'view-design';
 import '../my-theme/dist/iview.css';
+import store from '@/store/index.js'
 Vue.use(ViewUI, {
   size: 'small'
 })
-
 Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')
