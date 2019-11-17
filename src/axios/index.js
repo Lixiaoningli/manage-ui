@@ -14,7 +14,6 @@ axios.interceptors.request.use(function (config) {
 // 添加响应拦截器
 axios.interceptors.response.use(response => {
   // 对响应成功数据做点什么
-
   return response
 }, function (error) {
   // 对响应错误做点什么

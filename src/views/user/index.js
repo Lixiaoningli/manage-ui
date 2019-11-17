@@ -116,7 +116,7 @@ export default {
         if (res.data.data) {
           this.modelVisible = false
           this.getPage(Object.assign(this.page, { current: 1 }))
-          _this.$Message.success('添加用户成功!');
+          this.$Message.success('添加用户成功!');
         } else {
           this.$Message.error('添加用户失败!');
         }
@@ -152,9 +152,9 @@ export default {
         if (res.data.data) {
           this.modelVisible = false
           this.getPage(Object.assign(this.page, { current: 1 }))
-          this.$Message.success('添加用户成功!');
+          this.$Message.success('修改用户成功!');
         } else {
-          this.$Message.error('添加用户失败!');
+          this.$Message.error('修改用户失败!');
         }
         this.formLoading = false
       })

@@ -11,6 +11,13 @@ module.exports = {
                 pathRewrite: {
                     '^/user': '/user'
                 }
+            },
+            '/role': {
+                target: url,
+                ws: true,
+                pathRewrite: {
+                    '^/role': '/role'
+                }
             }
         }
     }
