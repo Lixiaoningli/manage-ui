@@ -19,7 +19,8 @@ axios.interceptors.response.use(response => {
 }, function (error) {
   // 对响应错误做点什么
   if (error.response.status === 403) {
-    // 需要登录
+    // 需要登录 清空浏览器sessionStorage并跳转到登录页面
+    sessionStorage.clear()
     router.push({
       path: '/login'
     })
