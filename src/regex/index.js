@@ -7,7 +7,7 @@ export function english(rule, value, callback) {
   if (reg.test(value)) {
     callback();
   } else {
-    return callback(new Error('只能输入汉字与英文'));
+    return callback(new Error('只能输入英文'));
   }
 }
 
