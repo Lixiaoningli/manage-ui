@@ -6,20 +6,20 @@
     class="my-menu"
     @on-select="menuItemSelect"
   >
-    <MenuItem name="/home">
-      <Icon type="ios-construct" />首页
+    <MenuItem name="/main">
+    <Icon type="ios-construct" />首页
     </MenuItem>
     <MenuItem name="boorowbooks">
-      <Icon type="ios-construct" />借书管理
+    <Icon type="ios-construct" />借书管理
     </MenuItem>
     <MenuItem name="returnbooks">
-      <Icon type="ios-construct" />还书管理
+    <Icon type="ios-construct" />还书管理
     </MenuItem>
     <MenuItem name="books">
-      <Icon type="ios-construct" />图书管理
+    <Icon type="ios-construct" />图书管理
     </MenuItem>
     <MenuItem name="readers">
-      <Icon type="ios-construct" />读者管理
+    <Icon type="ios-construct" />读者管理
     </MenuItem>
     <Submenu name="5">
       <template slot="title">
@@ -34,15 +34,15 @@
 import { log } from 'util'
 import { mapGetters } from 'vuex'
 export default {
-  mounted() {},
-  data() {
+  mounted () { },
+  data () {
     return {}
   },
   computed: {
     ...mapGetters({ activeName: 'activeName' })
   },
   methods: {
-    menuItemSelect(name) {
+    menuItemSelect (name) {
       sessionStorage.setItem('activeName', name)
       this.$router.push(name)
     }

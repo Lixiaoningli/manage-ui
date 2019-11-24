@@ -1,6 +1,6 @@
-import myMenu from '@/components/my-menu.vue'
+import fileUpload from '@/components/file-upload'
 export default {
   components: {
-    myMenu
+    fileUpload
   }
 }

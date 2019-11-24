@@ -1,13 +1,7 @@
 <template>
-  <div id="home" class="layout height-full">
-    <Layout class="height-full">
-      <Header class="header">
-        <my-menu></my-menu>
-      </Header>
-      <Content class="content">
-        <router-view></router-view>
-      </Content>
-    </Layout>
+  <div class="home">
+    首页
+    <file-upload></file-upload>
   </div>
 </template>
 <script src="./index.js"></script>

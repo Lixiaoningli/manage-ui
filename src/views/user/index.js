@@ -2,7 +2,7 @@ import { queryPage, saveUser, queryById, update, delUser } from '@/api/login/ind
 import { english, phone } from '@/regex/index.js'
 var md5 = require('md5');
 export default {
-  data() {
+  data () {
     return {
       modelTitle: '',
       modelVisible: false,
@@ -44,7 +44,7 @@ export default {
       tableData: [],
       page: {
         current: 1,
-        size: 10,
+        size: 1,
         total: 0
       },
       tableParams: {},
@@ -81,12 +81,12 @@ export default {
       tableForm: {}
     }
   },
-  mounted() {
+  mounted () {
     this.getPage(this.page)
   },
   methods: {
     // 查询用户列表
-    getPage(page) {
+    getPage (page) {
       this.tableLoading = true
       queryPage(Object.assign(page, this.tableParams)).then(res => {
         this.tableData = res.data.data.records
@@ -96,21 +96,21 @@ export default {
       })
     },
     // 页码变化后执行
-    pageChange(current) {
+    pageChange (current) {
       this.getPage(Object.assign(this.page, { current: current }))
     },
     // 页条数发生变化后执行
-    pageSizeChange(size) {
+    pageSizeChange (size) {
       this.getPage(Object.assign(this.page, { size: size }))
     },
     // 添加用户弹出窗触发
-    add() {
+    add () {
       this.tableForm = {}
       this.modelTitle = '添加用户'
       this.modelVisible = true
     },
     // 执行添加用户接口
-    save(data) {
+    save (data) {
       this.formLoading = true
       saveUser(data).then(res => {
         if (res.data.data) {
@@ -124,20 +124,20 @@ export default {
       })
     },
     // 查看用户详情
-    getDetails(index) {
+    getDetails (index) {
       var id = this.tableData[index].id
       this.getById(id)
       this.modelVisible = true
       this.modelTitle = '用户查看'
     },
-    getById(id) {
+    getById (id) {
       queryById(id).then(res => {
         this.tableForm = res.data.data
         this.tableForm.againPassword = res.data.data.password
       })
     },
     // 编辑用户
-    edit(index) {
+    edit (index) {
       alert("此功能存在BUG")
       /**
        * 当查询出来的密码是MD5加密后，如果在进行保存将会再次加密，导致密码错乱
@@ -146,7 +146,7 @@ export default {
       this.modelTitle = '用户编辑'
       this.getById(this.tableData[index].id)
     },
-    update(data) {
+    update (data) {
       this.formLoading = true
       update(data).then(res => {
         if (res.data.data) {
@@ -161,14 +161,14 @@ export default {
     },
 
     // 提交校验
-    validate() {
+    validate () {
       var _this = this
       this.$refs['tableFormInline'].validate(function (valid) {
         if (valid) {
           // 添加用户
           _this.formLoading = true
           var password = md5(_this.tableForm.password)
-          password = md5(md5Password + 'booksmanage')
+          password = md5(password + 'booksmanage')
           var againPassword = md5(_this.tableForm.againPassword)
           againPassword = md5(againPassword + 'booksmanage')
           Object.assign(_this.tableForm, {
@@ -186,7 +186,7 @@ export default {
       })
     },
     // 删除用户
-    del(index) {
+    del (index) {
       this.$Modal.confirm({
         title: '提示',
         content: '<p>确定要删除该用户吗？</p>',

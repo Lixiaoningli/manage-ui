@@ -2,7 +2,7 @@
 export default [
     {
         path: '/',
-        redirect: '/home'
+        redirect: '/main'
     },
     {
         path: '/login',
@@ -10,15 +10,15 @@ export default [
         component: () => import('@/views/login/index.vue')
     },
     {
-        path: '/home',
+        path: '/main',
         name: '主页',
-        component: () => import('@/views/home/index.vue'),
-        redirect: '/home/index',
+        component: () => import('@/views/index.vue'),
+        redirect: '/main/home',
         children: [
             {
-                path: 'index',
+                path: 'home',
                 name: '首页',
-                component: () => import('@/views/index.vue')
+                component: () => import('@/views/home/index.vue')
             },
             {
                 path: 'user',
