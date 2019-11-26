@@ -167,14 +167,11 @@ export default {
         if (valid) {
           // 添加用户
           _this.formLoading = true
-          var password = md5(_this.tableForm.password)
-          password = md5(password + 'booksmanage')
-          var againPassword = md5(_this.tableForm.againPassword)
-          againPassword = md5(againPassword + 'booksmanage')
-          Object.assign(_this.tableForm, {
-            password: password,
-            againPassword: againPassword
-          })
+          // var password = md5(_this.tableForm.password)
+          // password = md5(password + 'booksmanage')
+          // var againPassword = md5(_this.tableForm.againPassword)
+          // againPassword = md5(againPassword + 'booksmanage')
+          Object.assign(_this.tableForm)
           if (_this.modelTitle === '添加用户') {
             _this.save(_this.tableForm)
           } else {

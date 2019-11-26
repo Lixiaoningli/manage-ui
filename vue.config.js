@@ -13,11 +13,11 @@ module.exports = {
                     '^/fileUpload': '/fileUpload'
                 }
             },
-            '/filelook': {
+            '/static': {
                 target: fileUrl,
                 ws: true,
                 pathRewrite: {
-                    '^/filelook': '/filelook'
+                    '^/static': '/static'
                 }
             },
             '/user': {

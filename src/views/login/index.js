@@ -33,10 +33,10 @@ export default {
         loginSubmit(name) {
             this.$refs[name].validate((valid) => {
                 if (valid) {
-                    var md5Password = md5(this.formLogin.password)
-                    md5Password = md5(md5Password + 'booksmanage')
+                    // var md5Password = md5(this.formLogin.password)
+                    // md5Password = md5(md5Password + 'booksmanage')
                     login({
-                        password: md5Password,
+                        password: this.formLogin.password,
                         username: this.formLogin.username
                     }).then(res => {
                         if (res.data.data === null) {
