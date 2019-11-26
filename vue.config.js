@@ -33,6 +33,13 @@ module.exports = {
                 pathRewrite: {
                     '^/role': '/role'
                 }
+            },
+            '/books': {
+                target: url,
+                ws: true,
+                pathRewrite: {
+                    '^/books': '/books'
+                }
             }
         }
     }
