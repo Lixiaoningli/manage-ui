@@ -35,10 +35,12 @@ export default {
                 if (valid) {
                     // var md5Password = md5(this.formLogin.password)
                     // md5Password = md5(md5Password + 'booksmanage')
+                    this.$Spin.show()
                     login({
                         password: this.formLogin.password,
                         username: this.formLogin.username
                     }).then(res => {
+                        this.$Spin.hide()
                         if (res.data.data === null) {
                             this.$Message.error('用户名或密码错误！');
                         } else {

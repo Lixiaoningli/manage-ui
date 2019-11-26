@@ -40,6 +40,27 @@ module.exports = {
                 pathRewrite: {
                     '^/books': '/books'
                 }
+            },
+            '/readers': {
+                target: url,
+                ws: true,
+                pathRewrite: {
+                    '^/readers': '/readers'
+                }
+            },
+            '/returnbooks': {
+                target: url,
+                ws: true,
+                pathRewrite: {
+                    '^/returnbooks': '/returnbooks'
+                }
+            },
+            '/boorowbooks': {
+                target: url,
+                ws: true,
+                pathRewrite: {
+                    '^/boorowbooks': '/boorowbooks'
+                }
             }
         }
     }
