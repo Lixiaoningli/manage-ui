@@ -138,10 +138,6 @@ export default {
     },
     // 编辑用户
     edit (index) {
-      alert("此功能存在BUG")
-      /**
-       * 当查询出来的密码是MD5加密后，如果在进行保存将会再次加密，导致密码错乱
-       */
       this.modelVisible = true
       this.modelTitle = '用户编辑'
       this.getById(this.tableData[index].id)
