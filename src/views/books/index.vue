@@ -4,6 +4,7 @@
       type="primary"
       class="m-b-10"
       @click="add"
+      v-if="!choiceVisible"
     >添加图书</Button>
     <Tabs
       v-model="tabsActive"
@@ -33,11 +34,19 @@
             <Button
               type="primary"
               style="margin-right: 5px"
+              @click="choice(row)"
+              v-if="choiceVisible"
+            >选择</Button>
+            <Button
+              type="primary"
+              style="margin-right: 5px"
               @click="edit(row)"
+              v-if="!choiceVisible"
             >编辑</Button>
             <Button
               type="error"
               @click="del(index)"
+              v-if="!choiceVisible"
             >删除</Button>
           </template>
           <Switch v-model="tableLoading"></Switch>

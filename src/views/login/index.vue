@@ -39,6 +39,7 @@
               type="password"
               v-model="formLogin.password"
               placeholder="密码"
+              password
             >
             <Icon
               type="ios-medical-outline"

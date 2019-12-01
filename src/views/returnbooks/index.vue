@@ -1,6 +1,107 @@
 <template>
   <div id="returnbooks">
     <Card>
+      <Button
+        type="primary"
+        class="m-b-10"
+        @click="returnBook"
+      >还书</Button>
+      <!-- form内弹出窗 -->
+      <Modal
+        v-model="formMdelVisible"
+        :mask-closable="false"
+        title="借书列表"
+        width="80%"
+      >
+        <boorowbooks
+          :choiceVisible="true"
+          @choice="boorowChoice"
+        ></boorowbooks>
+        <template slot="footer">
+        </template>
+      </Modal>
+      <!-- 还书弹窗 -->
+      <Modal
+        v-model="returnVisible"
+        :mask-closable="false"
+        title="借书"
+      >
+        <Form
+          ref="tableFormInline"
+          :disabled="modelTitle==='借书查看'"
+          :model="tableForm"
+          :label-width="100"
+        >
+          <FormItem
+            prop="bookName"
+            label="所借图书"
+          >
+            <div
+              @click="boorowFocus"
+              style="border: 1px solid #dcdee2;height: 24px;border-radius: 3px;line-height: 24px;padding-left: 5px;"
+            >
+              {{tableForm.bookName}}
+            </div>
+          </FormItem>
+          <FormItem
+            prop="returnName"
+            label="还书人姓名"
+          >
+            <Input
+              type="text"
+              v-model="tableForm.returnName"
+              placeholder="还书人姓名"
+            ></Input>
+          </FormItem>
+          <FormItem
+            prop="overdue"
+            label="是否超期"
+          >
+            <Select
+              v-model="tableForm.overdue"
+              placeholder="是否超期"
+            >
+              <Option
+                v-for="item in whether"
+                :value="item.value"
+                :key="item.value"
+              >{{ item.label }}</Option>
+            </Select>
+          </FormItem>
+          <FormItem
+            prop="overtimeMoney"
+            label="超时扣费"
+          >
+            <Input
+              type="text"
+              v-model="tableForm.overtimeMoney"
+              placeholder="超时扣费"
+            ></Input>
+          </FormItem>
+
+          <FormItem
+            prop="overtimeDays"
+            label="超时天数"
+          >
+            <Input
+              type="text"
+              v-model="tableForm.overtimeDays"
+              placeholder="超时天数"
+            ></Input>
+          </FormItem>
+        </Form>
+
+        <template slot="footer">
+          <Button
+            type="primary"
+            @click="returnVisible = false"
+          >取消</Button>
+          <Button
+            type="primary"
+            @click="returnOk"
+          >确定</Button>
+        </template>
+      </Modal>
       <Table
         stripe
         :columns="tableCol"

@@ -1,11 +1,27 @@
-import { queryPage } from '@/api/returnbooks/index'
+import { queryPage, save } from '@/api/returnbooks/index'
+import boorowbooks from '../boorowbooks/index.vue'
 export default {
+  components: {
+    boorowbooks
+  },
   data () {
     return {
       modelTitle: '',
       modelVisible: false,
+      returnVisible: false,
       tableLoading: false,
+      formMdelVisible: false,
       formLoading: false,
+      whether: [
+        {
+          value: '否',
+          label: '否'
+        },
+        {
+          value: '是',
+          label: '是'
+        }
+      ],
       tableCol: [
         {
           type: 'index',
@@ -104,6 +120,43 @@ export default {
       this.tableForm = JSON.parse(JSON.stringify(row))
       this.modelVisible = true
       this.modelTitle = '还书查看'
+    },
+    // 还书
+    returnBook () {
+      this.tableForm = {}
+      this.returnVisible = true
+    },
+    returnOk () {
+      save(JSON.stringify({
+        bookId: this.tableForm.bookId,
+        boorowId: this.tableForm.boorowId,
+        borrowTime: this.tableForm.borrowTime,
+        overdue: this.tableForm.overdue,
+        overtimeDays: this.tableForm.overtimeDays,
+        overtimeMoney: this.tableForm.overtimeMoney,
+        readersId: this.tableForm.readersId,
+        returnName: this.tableForm.returnName
+      })).then(res => {
+        if (res.data.data) {
+          this.returnVisible = false
+          this.getPage(Object.assign(this.page, { current: 1 }))
+          this.$Message.success('借书成功!');
+        } else {
+          this.$Message.error('借书失败!');
+        }
+      })
+    },
+    boorowFocus () {
+      this.formMdelVisible = true
+    },
+    boorowChoice (row) {
+      this.formMdelVisible = false
+      this.tableForm.boorowId = row.id
+      this.tableForm.bookName = row.bookName
+      this.tableForm.bookId = row.bookId
+      this.tableForm.readersId = row.readerId
+      this.tableForm.borrowTime = row.borrowTime
+      this.tableForm.expectReturnTime = row.bookId.expectReturnTime
     }
   }
 }

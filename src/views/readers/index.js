@@ -1,4 +1,4 @@
-import { queryPage,saveReaders,update,delRole } from '@/api/readers/index'
+import { queryPage, saveReaders, update, delRole } from '@/api/readers/index'
 export default {
   data () {
     return {
@@ -73,6 +73,12 @@ export default {
         ]
       },
       tableForm: {}
+    }
+  },
+  props: {
+    choiceVisible: {
+      type: Boolean,
+      default: false
     }
   },
   mounted () {
@@ -177,7 +183,10 @@ export default {
           })
         }
       })
-
+    },
+    // 选择
+    choice (row) {
+      this.$emit("choice", row)
     }
   }
 }

@@ -7,3 +7,11 @@ export function queryPage (data) {
     params: data
   })
 }
+// 添加还书记录
+export function save (data) {
+  return request({
+    url: '/returnbooks/save',
+    method: 'post',
+    data: data
+  })
+}

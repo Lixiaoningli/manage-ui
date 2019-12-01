@@ -18,11 +18,11 @@ export default {
       tableData: [],
       whether: [
         {
-          value: '0',
+          value: '否',
           label: '否'
         },
         {
-          value: '1',
+          value: '是',
           label: '是'
         }
       ],
@@ -112,6 +112,12 @@ export default {
         ]
       },
       tableForm: {}
+    }
+  },
+  props: {
+    choiceVisible: {
+      type: Boolean,
+      default: false
     }
   },
   mounted () {
@@ -204,6 +210,10 @@ export default {
     afterSuccess (file) {
       this.tableForm.afterImageUrl = file.data.data.filePath
       this.formKey++
+    },
+    // 选择
+    choice (row) {
+      this.$emit("choice", row)
     }
   }
 }
