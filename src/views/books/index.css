@@ -38,3 +38,6 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+.tabs-books /deep/ .ivu-tabs-tabpane {
+    margin-bottom: 10px;
+}

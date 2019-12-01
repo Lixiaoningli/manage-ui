@@ -4,7 +4,7 @@ import App from './App.vue'
 import router from '@/router/index.js'
 // 引入Iview 组件 （v: 4.x）
 import ViewUI from 'view-design';
-import '../my-theme/dist/iview.css';
+import 'view-design/dist/styles/iview.css';
 import store from '@/store/index.js'
 Vue.use(ViewUI, {
   size: 'small'

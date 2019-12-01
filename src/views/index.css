@@ -1,5 +1,6 @@
 .header {
   height: 50px;
+  background: #ffffff;
 }
 .content {
   height: calc(100% - 50px);

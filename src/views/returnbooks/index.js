@@ -14,8 +14,11 @@ export default {
         },
         {
           title: '图书',
-          key: 'returnName',
-          align: 'center'
+          key: 'bookName',
+          align: 'center',
+          render: (h, row) => {
+            return h('img', { style: { width: '100px' }, attrs: { src: row.row.frontImageUrl } })
+          }
         },
         {
           title: '还书人姓名',
@@ -24,7 +27,7 @@ export default {
         },
         {
           title: '借书人姓名',
-          key: 'returnName',
+          key: 'readerName',
           align: 'center'
         },
         {

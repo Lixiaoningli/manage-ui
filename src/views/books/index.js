@@ -1,6 +1,6 @@
 import { getPage, saveBooks, update, delBooks } from '@/api/books/index'
 export default {
-  data() {
+  data () {
     return {
       modelTitle: '',
       modelVisible: false,
@@ -71,7 +71,6 @@ export default {
           key: 'bookName',
           align: 'center',
           render: (h, row) => {
-            console.log(row)
             return h('img', { style: { width: '100px' }, attrs: { src: row.row.frontImageUrl } })
           }
         },
@@ -115,7 +114,7 @@ export default {
       tableForm: {}
     }
   },
-  mounted() {
+  mounted () {
     this.getList(this.page)
   },
   methods: {
@@ -123,7 +122,7 @@ export default {
       this.modelVisible = true
       this.tableForm = {}
     },
-    getList(page) {
+    getList (page) {
       this.tableLoading = true
       getPage(Object.assign(page, this.tableParams)).then(res => {
         this.tableData = res.data.data.records
@@ -133,24 +132,24 @@ export default {
       })
     },
     // 页码变化后执行
-    pageChange(current) {
+    pageChange (current) {
       this.getList(Object.assign(this.page, { current: current }))
     },
     // 页条数发生变化后执行
-    pageSizeChange(size) {
+    pageSizeChange (size) {
       this.getList(Object.assign(this.page, { size: size }))
     },
-    getDetails(row) {
+    getDetails (row) {
       this.tableForm = JSON.parse(JSON.stringify(row))
       this.modelVisible = true
       this.modelTitle = '图书查看'
     },
-    edit(row) {
+    edit (row) {
       this.modelVisible = true
       this.modelTitle = '图书编辑'
       this.tableForm = JSON.parse(JSON.stringify(row))
     },
-    update(data) {
+    update (data) {
       this.formLoading = true
       update(data).then(res => {
         if (res.data.data) {
@@ -164,7 +163,7 @@ export default {
       })
     },
     // 提交校验
-    validate() {
+    validate () {
       var _this = this
       this.$refs['tableFormInline'].validate(function (valid) {
         if (valid) {
@@ -180,7 +179,7 @@ export default {
         }
       })
     },
-    del(index) {
+    del (index) {
       this.$Modal.confirm({
         title: '提示',
         content: '<p>确定要删除该图书吗？</p>',
@@ -199,12 +198,12 @@ export default {
     // 前图片上传后回调方法
     frontSuccess (file) {
       this.tableForm.frontImageUrl = file.data.data.filePath
-      this.formKey ++
+      this.formKey++
     },
     // 后图片上传回调方法
     afterSuccess (file) {
       this.tableForm.afterImageUrl = file.data.data.filePath
-      this.formKey ++
+      this.formKey++
     }
   }
 }

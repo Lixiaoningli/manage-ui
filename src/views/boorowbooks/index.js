@@ -14,12 +14,15 @@ export default {
         },
         {
           title: '图书',
-          key: 'readersId',
-          align: 'center'
+          key: 'bookName',
+          align: 'center',
+          render: (h, row) => {
+            return h('img', { style: { width: '100px' }, attrs: { src: row.row.frontImageUrl } })
+          }
         },
         {
           title: '借书人',
-          key: 'readersId',
+          key: 'readerName',
           align: 'center'
         },
         {
