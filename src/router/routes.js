@@ -13,7 +13,7 @@ export default [
         path: '/main',
         name: '主页',
         component: () => import('@/views/index.vue'),
-        redirect: '/main/home',
+        redirect: '/main/boorowbooks',
         children: [
             {
                 path: 'home',

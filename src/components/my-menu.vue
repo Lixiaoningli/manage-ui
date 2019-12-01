@@ -6,9 +6,9 @@
     class="my-menu"
     @on-select="menuItemSelect"
   >
-    <MenuItem name="/main">
+    <!-- <MenuItem name="/main">
     <Icon type="ios-construct" />首页
-    </MenuItem>
+    </MenuItem> -->
     <MenuItem name="boorowbooks">
     <Icon type="ios-construct" />借书管理
     </MenuItem>

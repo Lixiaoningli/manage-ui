@@ -4,7 +4,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     user: null,
-    activeName: sessionStorage.getItem("activeName") || '/home'
+    activeName: sessionStorage.getItem("activeName") || 'boorowbooks'
   },
   getters: {
     user: () => sessionStorage.getItem("user"),
