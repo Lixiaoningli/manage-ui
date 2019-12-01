@@ -16,6 +16,7 @@ router.beforeEach((to, from, next) => {
          */
         if (!sessionStorage.getItem("user")) {
             // 未登录转发到登录页面去登录
+            sessionStorage.setItem("user", null)
             next({
                 path: '/login'
             })

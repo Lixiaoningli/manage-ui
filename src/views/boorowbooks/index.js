@@ -77,6 +77,7 @@ export default {
     // 查看借书详情
     getDetails (row) {
       this.tableForm = JSON.parse(JSON.stringify(row))
+      console.log(this.tableForm)
       this.modelVisible = true
       this.modelTitle = '借书查看'
     }

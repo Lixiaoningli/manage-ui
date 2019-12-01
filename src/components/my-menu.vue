@@ -31,7 +31,6 @@
   </Menu>
 </template>
 <script>
-import { log } from 'util'
 import { mapGetters } from 'vuex'
 export default {
   mounted () { },
