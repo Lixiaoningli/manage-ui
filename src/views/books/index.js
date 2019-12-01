@@ -6,6 +6,7 @@ export default {
       modelVisible: false,
       tableLoading: false,
       formLoading: false,
+      formKey: 0,
       tableParams: {},
       tableLoading: false,
       page: {
@@ -196,8 +197,14 @@ export default {
       })
     },
     // 前图片上传后回调方法
-    frontSuccess(file) {
-      console.log(file)
+    frontSuccess (file) {
+      this.tableForm.frontImageUrl = file.data.data.filePath
+      this.formKey ++
+    },
+    // 后图片上传回调方法
+    afterSuccess (file) {
+      this.tableForm.afterImageUrl = file.data.data.filePath
+      this.formKey ++
     }
   }
 }

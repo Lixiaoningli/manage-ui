@@ -32,3 +32,9 @@
 #books {
     padding: 20px;
 }
+.book-image {
+    width: 107px;
+    height: 115px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

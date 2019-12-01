@@ -47,6 +47,7 @@
         :rules="tableFormInline"
         :label-width="80"
         inline
+        :key="formKey"
       >
         <Row>
           <Col span="12">
@@ -80,33 +81,39 @@
         </Row>
         <Row>
           <Col span="12">
-            <FormItem
-              prop="frontImageUrl"
-              lable="正面封面"
-              v-if="!tableForm.frontImageUrl"
-              label="正面封面"
-            >
-              <Upload multiple type="drag" action="/fileUpload/upload" :on-success="frontSuccess">
+            <FormItem prop="frontImageUrl" lable="正面封面" label="正面封面">
+              <Upload
+                multiple
+                type="drag"
+                action="/fileUpload/upload"
+                :on-success="frontSuccess"
+                v-if="!tableForm.frontImageUrl"
+              >
                 <div style="padding: 20px 0">
                   <Icon type="ios-image-outline" size="52" style="color: #3399ff"></Icon>
                   <p>请选择图片</p>
                 </div>
               </Upload>
+              <!-- 设置图片回显 -->
+              <img v-else :src="tableForm.frontImageUrl" class="book-image" />
             </FormItem>
           </Col>
           <Col span="12">
-            <FormItem
-              prop="afterImageUrl"
-              lable="背面封面"
-              v-if="!tableForm.afterImageUrl"
-              label="背面封面"
-            >
-              <Upload multiple type="drag" action="/fileUpload/upload">
+            <FormItem prop="afterImageUrl" lable="背面封面" label="背面封面">
+              <Upload
+                multiple
+                type="drag"
+                action="/fileUpload/upload"
+                :on-success="afterSuccess"
+                v-if="!tableForm.afterImageUrl"
+              >
                 <div style="padding: 20px 0">
                   <Icon type="ios-image-outline" size="52" style="color: #3399ff"></Icon>
                   <p>请选择图片</p>
                 </div>
               </Upload>
+              <!-- 设置图片回显 -->
+              <img v-else :src="tableForm.afterImageUrl" class="book-image" />
             </FormItem>
           </Col>
         </Row>
