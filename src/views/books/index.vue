@@ -1,66 +1,134 @@
 <template>
   <div id="books">
-      <Tabs v-model="tabsActive">
-          <TabPane label="列表" icon="logo-windows" name="list">
-            <Table stripe :columns="tableCol" border :data="tableData" v-if="tabsActive === 'list'">
-              <template slot="action" slot-scope="{ row, index }">
-          <Button type="primary" style="margin-right: 5px" @click="getDetails(row)">查看</Button>
-          <Button type="primary" style="margin-right: 5px" @click="edit(row)">编辑</Button>
-          <Button type="error" @click="del(index)">删除</Button>
-              </template>
-              <Switch v-model="tableLoading"></Switch>
-            </Table>
-          </TabPane>
-           <TabPane label="视图" icon="logo-apple" name="view">
-            <div class="flex-div" v-if="tabsActive === 'view'">
-              <div class="row-col" v-for="item in tableData">
-                <img :src="item.frontImageUrl"/>
-                <div class="content">
-                  <a>{{item.bookName}}</a>
-                  <span>{{item.bookAuthor}}</span>
-                  <p>
-                    <strong class="color-red">￥36.7</strong>
-                    <strong>￥38.00</strong>
-                  </p>
-                </div>
-              </div>
+    <Button type="primary" class="m-b-10" @click="add">添加图书</Button>
+    <Tabs v-model="tabsActive">
+      <TabPane label="列表" icon="logo-windows" name="list">
+        <Table stripe :columns="tableCol" border :data="tableData" v-if="tabsActive === 'list'">
+          <template slot="action" slot-scope="{ row, index }">
+            <Button type="primary" style="margin-right: 5px" @click="getDetails(row)">查看</Button>
+            <Button type="primary" style="margin-right: 5px" @click="edit(row)">编辑</Button>
+            <Button type="error" @click="del(index)">删除</Button>
+          </template>
+          <Switch v-model="tableLoading"></Switch>
+        </Table>
+      </TabPane>
+      <TabPane label="视图" icon="logo-apple" name="view">
+        <div class="flex-div" v-if="tabsActive === 'view'">
+          <div class="row-col" v-for="(item,index) in tableData" :key="`${index}view`">
+            <img :src="item.frontImageUrl" />
+            <div class="content">
+              <a>{{item.bookName}}</a>
+              <span>{{item.bookAuthor}}</span>
+              <p>
+                <strong class="color-red">￥36.7</strong>
+                <strong>￥38.00</strong>
+              </p>
             </div>
-          </TabPane>
-      </Tabs>
-      <div>
-        <Page
-          class-name="page"
-          :page-size="page.size"
-          :total.sync="page.total"
-          show-total
-          @on-change="pageChange"
-          @on-page-size-change="pageSizeChange"
-        />
-      </div>
-      <!-- 查看、编写详情框 -->
+          </div>
+        </div>
+      </TabPane>
+    </Tabs>
+    <div>
+      <Page
+        class-name="page"
+        :page-size="page.size"
+        :total.sync="page.total"
+        show-total
+        @on-change="pageChange"
+        @on-page-size-change="pageSizeChange"
+      />
+    </div>
+    <!-- 查看、编写详情框 -->
     <Modal v-model="modelVisible" :mask-closable="false" :title="modelTitle">
       <Form
         ref="tableFormInline"
         :disabled="modelTitle==='图书查看'"
         :model="tableForm"
         :rules="tableFormInline"
+        :label-width="80"
         inline
       >
-        <FormItem prop="username">
-          <Input type="text" v-model="tableForm.username" placeholder="用户名"></Input>
-        </FormItem>
-        <FormItem prop="password">
-          <Input type="password" v-model="tableForm.password" placeholder="密码"></Input>
-        </FormItem>
-        <FormItem prop="againPassword" v-if="modelTitle!=='图书查看'">
-          <Input type="password" v-model="tableForm.againPassword" placeholder="确认密码"></Input>
-        </FormItem>
-        <FormItem prop="holder">
-          <Input type="text" v-model="tableForm.holder" placeholder="账号持有者"></Input>
-        </FormItem>
-        <FormItem prop="phone">
-          <Input type="text" v-model="tableForm.phone" placeholder="联系电话"></Input>
-        </FormItem>
+        <Row>
+          <Col span="12">
+            <FormItem prop="bookName" label="书籍名称">
+              <Input type="text" v-model="tableForm.bookName" placeholder="书籍名称"></Input>
+            </FormItem>
+          </Col>
+          <Col span="12">
+            <FormItem prop="bookAuthor" label="书籍作者">
+              <Input type="text" v-model="tableForm.bookAuthor" placeholder="书籍作者"></Input>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span="12">
+            <FormItem prop="bookPub" label="书籍出版社">
+              <Input type="text" v-model="tableForm.bookPub" placeholder="书籍出版社"></Input>
+            </FormItem>
+          </Col>
+          <Col span="12">
+            <FormItem prop="bookSort" label="书籍分类">
+              <Select v-model="tableForm.bookSort" placeholder="书籍分类">
+                <Option
+                  v-for="item in booksType"
+                  :value="item.value"
+                  :key="item.value"
+                >{{ item.label }}</Option>
+              </Select>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span="12">
+            <FormItem
+              prop="frontImageUrl"
+              lable="正面封面"
+              v-if="!tableForm.frontImageUrl"
+              label="正面封面"
+            >
+              <Upload multiple type="drag" action="/fileUpload/upload" :on-success="frontSuccess">
+                <div style="padding: 20px 0">
+                  <Icon type="ios-image-outline" size="52" style="color: #3399ff"></Icon>
+                  <p>请选择图片</p>
+                </div>
+              </Upload>
+            </FormItem>
+          </Col>
+          <Col span="12">
+            <FormItem
+              prop="afterImageUrl"
+              lable="背面封面"
+              v-if="!tableForm.afterImageUrl"
+              label="背面封面"
+            >
+              <Upload multiple type="drag" action="/fileUpload/upload">
+                <div style="padding: 20px 0">
+                  <Icon type="ios-image-outline" size="52" style="color: #3399ff"></Icon>
+                  <p>请选择图片</p>
+                </div>
+              </Upload>
+            </FormItem>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col span="12">
+            <FormItem prop="bookNum" label="是否在书架">
+              <Select v-model="tableForm.bookNum" placeholder="书籍是否在书架">
+                <Option
+                  v-for="item in whether"
+                  :value="item.value"
+                  :key="item.value"
+                >{{ item.label }}</Option>
+              </Select>
+            </FormItem>
+          </Col>
+          <Col span="12">
+            <FormItem prop="readerPrestige" v-if="tableForm.bookNum === 1" label="所在书架编号">
+              <Input type="text" v-model="tableForm.readerPrestige" placeholder="所在书架编号"></Input>
+            </FormItem>
+          </Col>
+        </Row>
       </Form>
       <template slot="footer">
         <Button type="primary" @click="validate" v-if="modelTitle!=='图书查看'">保存</Button>
