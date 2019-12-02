@@ -1,4 +1,4 @@
-# manage
+# manage-ui
 
 ## Project setup
 ```
@@ -10,3 +10,5 @@ npm install
 npm run dev
 ```
 
+# manage
+## 后端代码地址 https://github.com/SaveUpStrength/manage
