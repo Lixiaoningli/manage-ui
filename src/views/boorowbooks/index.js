@@ -125,7 +125,7 @@ export default {
     boorowOk () {
       this.tableForm.expectReturnTime = formatTimes(
         this.tableForm.expectReturnTime,
-        'yyyy-MM-dd HH-mm-ss'
+        'yyyy-MM-dd'
       )
       save(JSON.stringify({
         readersId: this.tableForm.readersId,
